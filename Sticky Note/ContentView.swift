@@ -31,14 +31,25 @@ struct ContentView: View {
                 ForEach(notes) { notes in
                     Text(notes.title)
                 }
+                //Delete Geasture
+                .onDelete(perform: deleteNote)
             }
         }
         .padding()
     }
     
+    //AddFunc
     func addNote() {
-        let note = Notes()
-        modelContext.insert(note)
+        let notes = Notes()
+        modelContext.insert(notes)
+    }
+    
+    //DeleteFunc
+    func deleteNote(_ indexSet: IndexSet) {
+        for index in indexSet {
+            let notes = notes[index]
+            modelContext.delete(notes)
+        }
     }
 }
 
