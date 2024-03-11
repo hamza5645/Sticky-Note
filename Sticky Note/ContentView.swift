@@ -41,6 +41,7 @@ struct ContentView: View {
     //AddFunc
     func addNote() {
         let notes = Notes()
+        notes.title = "New Note"
         modelContext.insert(notes)
     }
     
