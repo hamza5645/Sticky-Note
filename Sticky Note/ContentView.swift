@@ -8,16 +8,37 @@
 import SwiftUI
 import RealityKit
 import RealityKitContent
+import SwiftData
 
 struct ContentView: View {
+    //SwiftData
+    @Environment(\.modelContext) var modelContext
+    @Query var notes: [Notes]
+    
     var body: some View {
         VStack {
-            Model3D(named: "Scene", bundle: realityKitContentBundle)
-                .padding(.bottom, 50)
-
-            Text("Hello, world!")
+            HStack {
+                Spacer()
+                Button("Add Note") {
+                    addNote()
+                }
+                .foregroundColor(.yellow)
+                .padding()
+            }
+            Spacer()
+            
+            List {
+                ForEach(notes) { notes in
+                    Text(notes.title)
+                }
+            }
         }
         .padding()
+    }
+    
+    func addNote() {
+        let note = Notes()
+        modelContext.insert(note)
     }
 }
 

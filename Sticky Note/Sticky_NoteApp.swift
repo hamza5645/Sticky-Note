@@ -13,5 +13,6 @@ struct Sticky_NoteApp: App {
         WindowGroup {
             ContentView()
         }
+        .modelContainer(for: Notes.self)
     }
 }
